@@ -38,4 +38,7 @@ spec:
               value: "postgres"
 
             - name: POSTGRES_PASSWORD
-              value: "supersecret"
+              valueFrom:
+                secretKeyRef:
+                  name: pgpassword
+                  key: POSTGRES_PASSWORD
