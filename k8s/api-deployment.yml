@@ -18,3 +18,24 @@ spec:
           image: kodega2016/fib-api
           ports:
             - containerPort: 8080
+          env:
+            - name: REDIS_HOST
+              value: redis-clusterip-svc
+
+            - name: REDIS_PORT
+              value: "6379"
+
+            - name: POSTGRES_HOST
+              value: postgres-clusterip-svc
+
+            - name: POSTGRES_PORT
+              value: "5432"
+
+            - name: POSTGRES_DATABASE
+              value: "postgres"
+
+            - name: POSTGRES_USER
+              value: "postgres"
+
+            - name: POSTGRES_PASSWORD
+              value: "supersecret"
