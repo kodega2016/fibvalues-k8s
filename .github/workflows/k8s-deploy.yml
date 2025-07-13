@@ -25,6 +25,9 @@ jobs:
     needs: [unit-test]
     runs-on: ubuntu-latest
     steps:
+      - name: checkout the code
+        uses: actions/checkout@v4
+
       - name: set google service keys for auth
         uses: "google-github-actions/auth@v2"
         with:
