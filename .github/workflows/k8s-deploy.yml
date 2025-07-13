@@ -1,0 +1,14 @@
+name: K8s Deployment
+on:
+  push:
+    branches:
+      - main
+env:
+  SHA: $(git rev-parse HEAD)
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout the code
+        uses: actions/checkout@v4
