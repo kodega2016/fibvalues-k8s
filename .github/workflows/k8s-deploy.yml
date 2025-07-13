@@ -29,3 +29,8 @@ jobs:
         uses: "google-github-actions/auth@v2"
         with:
           credentials_json: "${{ secrets.GKE_SA_KEY }}"
+
+      - name: set google cloud project
+        uses: "google-github-actions/setup-gcloud@v2"
+        with:
+          project_id: ${{secrets.PROJECT_ID}}
