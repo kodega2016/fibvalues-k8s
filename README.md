@@ -22,3 +22,24 @@ Steps to deploy to the google cloud:
 a) Create google cloud project `multi-k8s`
 b) Enable the Kubernetes Engine API
 d) Create a kubernetes cluster named `multi-k8s-cluster` with standard cluster mode
+e) create service account with service role `Kubernetes Engine Admin`
+f) added secrets in the github actions
+g) added github actions workflow
+h) create secrets using the following command.
+
+```bash
+kubectl create secret generic pgpassword --from-literal=POSTGRES_PASSWORD=<password>
+```
+
+After applying the config file,we need to install helm for ingress using the script.
+And we need run the following command to install the `ingress-controller`.
+
+```bash
+helm upgrade --install ingress-nginx ingress-nginx \
+  --repo https://kubernetes.github.io/ingress-nginx \
+  --namespace ingress-nginx --create-namespace
+```
+
+We can now access the application using the ingress nginx external endpoints
+which can be found in the Gateways,Services and Ingress section in the google
+cloud.
