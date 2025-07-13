@@ -66,3 +66,10 @@ jobs:
           docker image push kodega2016/fib-api:${{env.SHA}}
           docker image push kodega2016/fib-worker:${{env.SHA}}
           docker image push kodega2016/fib-client:${{env.SHA}}
+
+      - name: deploy to k8s
+        run: |
+          kubectl apply -f k8s
+          kubectl set image deployments/api-deployment api=kodega2016/fib-api:${{ env.SHA }}
+          kubectl set image deployments/client-deployment client=kodega2016/fib-client:${{ env.SHA }}
+          kubectl set image deployments/worker-deployment worker=kodega2016/fib-worker:${{ env.SHA }}
