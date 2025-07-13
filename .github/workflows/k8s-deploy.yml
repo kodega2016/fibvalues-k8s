@@ -53,6 +53,10 @@ jobs:
           docker image build ./worker -t kodega2016/fib-worker:latest -t kodega2016/fib-worker:${{env.SHA}}
           docker image build ./client -t kodega2016/fib-client:latest -t kodega2016/fib-client:${{env.SHA}}
 
+
+      - name: login to hub.docker.com
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
       - name: push the docker images
         run: |
           docker image push kodega2016/fib-api:latest
