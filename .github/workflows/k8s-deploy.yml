@@ -7,7 +7,7 @@ env:
   SHA: $(git rev-parse HEAD)
 
 jobs:
-  deployment:
+  unit-test:
     runs-on: ubuntu-latest
     steps:
       - name: checkout the code
@@ -21,6 +21,10 @@ jobs:
           docker image build ./client -f ./client/Dockerfile.dev -t kodega2016/react-app-dev
           docker container run -e CI=true kodega2016/react-app-dev npm run test
 
+  deployment:
+    needs: [unit-test]
+    runs-on: ubuntu-latest
+    steps:
       - name: set google service keys for auth
         uses: "google-github-actions/auth@v2"
         with:
