@@ -52,3 +52,13 @@ jobs:
           docker image build ./api -t kodega2016/fib-api:latest -t kodega2016/fib-api:${{env.SHA}}
           docker image build ./worker -t kodega2016/fib-worker:latest -t kodega2016/fib-worker:${{env.SHA}}
           docker image build ./client -t kodega2016/fib-client:latest -t kodega2016/fib-client:${{env.SHA}}
+
+      - name: push the docker images
+        run: |
+          docker image push kodega2016/fib-api:latest
+          docker image push kodega2016/fib-worker:latest
+          docker image push kodega2016/fib-client:latest
+
+          docker image push kodega2016/fib-api:${{env.SHA}}
+          docker image push kodega2016/fib-worker:${{env.SHA}}
+          docker image push kodega2016/fib-client:${{env.SHA}}
