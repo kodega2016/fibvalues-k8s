@@ -19,4 +19,9 @@ jobs:
       - name: build and run unit test
         run: |
           docker image build ./client -f ./client/Dockerfile.dev -t kodega2016/react-app-dev
-          docker container run -e CI=true -it kodega2016/react-app-dev npm run test
+          docker container run -e CI=true kodega2016/react-app-dev npm run test
+
+      - name: set google service keys for auth
+        uses: "google-github-actions/auth@v2"
+        with:
+          credentials_json: "${{ secrets.GKE_SA_KEY }}"
