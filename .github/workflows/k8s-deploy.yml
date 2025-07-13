@@ -12,3 +12,11 @@ jobs:
     steps:
       - name: checkout the code
         uses: actions/checkout@v4
+
+      - name: login to hub.docker.com
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: build and run unit test
+        run: |
+          docker image build ./client -f Dockerfile.dev -t kodega2016/react-app-dev
+          docker container run -it -e CI=true kodega2016/react-app-dev npm run test
