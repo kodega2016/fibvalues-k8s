@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: kodega-k8s-certificate
+spec:
+  secretName: kodega-k8s-certificate
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: kodegak8s.com
+  dnsNames:
+    - kodegak8s.com
+    - www.kodegak8s.com
