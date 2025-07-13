@@ -46,3 +46,9 @@ jobs:
         with:
           cluster_name: ${{secrets.CLUSTER_NAME}}
           location: ${{secrets.CLUSTER_LOCATION}}
+
+      - name: build the docker images
+        run: |
+          docker image build ./api -t kodega2016/fib-api:latest -t kodega2016/fib-api:${{env.SHA}}
+          docker image build ./worker -t kodega2016/fib-worker:latest -t kodega2016/fib-worker:${{env.SHA}}
+          docker image build ./client -t kodega2016/fib-client:latest -t kodega2016/fib-client:${{env.SHA}}
